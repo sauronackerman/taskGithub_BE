@@ -1,4 +1,4 @@
 
 ---
 featureB
-add
+add stash

@@ -1,1 +1,168 @@
 # taskGithub_BE
+
+   Buat sebuah repository di Github
+    
+    git clone https://github.com/sauronackerman/taskGithub_BE.git
+Cloning into 'taskGithub_BE'...
+remote: Enumerating objects: 3, done.
+remote: Counting objects: 100% (3/3), done.
+remote: Total 3 (delta 0), reused 0 (delta 0), pack-reused 0
+Receiving objects: 100% (3/3), done.
+
+    
+    Implementasikan penggunaan branching yang terdiri dari master, development, featureA, dan featureB
+    
+rizamahard@mahard:~/Documents/taskGithub_BE$ git branch master
+rizamahard@mahard:~/Documents/taskGithub_BE$ git branch --list
+* main
+  master
+rizamahard@mahard:~/Documents/taskGithub_BE$ git branch development
+rizamahard@mahard:~/Documents/taskGithub_BE$ git branch featureA
+rizamahard@mahard:~/Documents/taskGithub_BE$ git branch featureB
+rizamahard@mahard:~/Documents/taskGithub_BE$ git branch --list
+  development
+  featureA
+  featureB
+* main
+  master
+
+    
+    Implementasikan intruksi git untuk push, pull, stash dan merge
+    push :
+rizamahard@mahard:~/Documents/taskGithub_BE$ touch test.txt
+rizamahard@mahard:~/Documents/taskGithub_BE$ git add .
+rizamahard@mahard:~/Documents/taskGithub_BE$ git commit -m "create plain text"
+[main b446aa2] create plain text
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 test.txt
+rizamahard@mahard:~/Documents/taskGithub_BE$ git push origin main
+Username for 'https://github.com': sauronackerman
+Password for 'https://sauronackerman@github.com': 
+Enumerating objects: 4, done.
+Counting objects: 100% (4/4), done.
+Delta compression using up to 16 threads
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (3/3), 287 bytes | 287.00 KiB/s, done.
+Total 3 (delta 0), reused 0 (delta 0), pack-reused 0
+To https://github.com/sauronackerman/taskGithub_BE.git
+   ecee262..b446aa2  main -> main
+   
+   pull :
+rizamahard@mahard:~/Documents/taskGithub_BE$ git pull origin featureA
+hint: Pulling without specifying how to reconcile divergent branches is
+hint: discouraged. You can squelch this message by running one of the following
+hint: commands sometime before your next pull:
+hint: 
+hint:   git config pull.rebase false  # merge (the default strategy)
+hint:   git config pull.rebase true   # rebase
+hint:   git config pull.ff only       # fast-forward only
+hint: 
+hint: You can replace "git config" with "git config --global" to set a default
+hint: preference for all repositories. You can also pass --rebase, --no-rebase,
+hint: or --ff-only on the command line to override the configured default per
+hint: invocation.
+remote: Enumerating objects: 5, done.
+remote: Counting objects: 100% (5/5), done.
+remote: Compressing objects: 100% (2/2), done.
+remote: Total 3 (delta 0), reused 0 (delta 0), pack-reused 0
+Unpacking objects: 100% (3/3), 664 bytes | 664.00 KiB/s, done.
+From https://github.com/sauronackerman/taskGithub_BE
+ * branch            featureA   -> FETCH_HEAD
+   c582bce..801d53d  featureA   -> origin/featureA
+Updating c582bce..801d53d
+Fast-forward
+ test.txt | 1 +
+ 1 file changed, 1 insertion(+)
+
+stash :
+rizamahard@mahard:~/Documents/taskGithub_BE$ git stash save "stast1"
+Saved working directory and index state On featureB: stast1
+rizamahard@mahard:~/Documents/taskGithub_BE$ git stash pop stash@{0}
+On branch featureB
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   test.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+Dropped stash@{0} (72816f79b8ffe3d485f9490956260c907ef31878)
+rizamahard@mahard:~/Documents/taskGithub_BE$ git diff
+diff --git a/test.txt b/test.txt
+index 3682125..6214482 100644
+--- a/test.txt
++++ b/test.txt
+@@ -1,4 +1,4 @@
+ 
+ ---
+ featureB
+-add
++add stash
+rizamahard@mahard:~/Documents/taskGithub_BE$ git add .
+rizamahard@mahard:~/Documents/taskGithub_BE$ git commit -m "add stash"
+[featureB 2ee3121] add stash
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+rizamahard@mahard:~/Documents/taskGithub_BE$ git push origin featureB
+Enumerating objects: 5, done.
+Counting objects: 100% (5/5), done.
+Delta compression using up to 16 threads
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (3/3), 305 bytes | 305.00 KiB/s, done.
+Total 3 (delta 0), reused 0 (delta 0), pack-reused 0
+To https://github.com/sauronackerman/taskGithub_BE.git
+   38af391..2ee3121  featureB -> featureB
+rizamahard@mahard:~/Documents/taskGithub_BE$ git diff
+rizamahard@mahard:~/Documents/taskGithub_BE$ git checkout development
+
+
+merge:
+rizamahard@mahard:~/Documents/taskGithub_BE$ git merge featureA
+CONFLICT (add/add): Merge conflict in test.txt
+Auto-merging test.txt
+Merge made by the 'recursive' strategy.
+ test.txt | 1 +
+ 1 file changed, 1 insertion(+)
+rizamahard@mahard:~/Documents/taskGithub
+
+    Implementasikan sebuah penanganan conflict di branch developement ketika setelah merge dari branch featureA lalu merge dari branch featureB (Conflict bisa terjadi jika kedua branch mengerjakan di file dan line code yang sama)
+    Gunakan merge no fast forward
+rizamahard@mahard:~/Documents/taskGithub_BE$ git merge featureA
+Auto-merging test.txt
+CONFLICT (content): Merge conflict in test.txt
+Automatic merge failed; fix conflicts and then commit the result.
+rizamahard@mahard:~/Documents/taskGithub_BE$ git diff
+diff --cc test.txt
+index 6214482,bec328e..0000000
+--- a/test.txt
++++ b/test.txt
+@@@ -1,4 -1,1 +1,8 @@@
+++<<<<<<< HEAD
+ +
+ +---
+ +featureB
+ +add stash
+++=======
++ featureA
+++>>>>>>> featureA
+rizamahard@mahard:~/Documents/taskGithub_BE$ git diff
+diff --cc test.txt
+index 6214482,bec328e..0000000
+--- a/test.txt
++++ b/test.txt
+@@@ -1,4 -1,1 +1,3 @@@
+ -featureA
+ +
+- ---
+- featureB
+- add stash
+++featureA
+++
+
+merge no-ff:
+rizamahard@mahard:~/Documents/taskGithub_BE$ git checkout main
+Switched to branch 'main'
+Your branch is up to date with 'origin/main'.
+rizamahard@mahard:~/Documents/taskGithub_BE$ git merge list --no-ff
+Merge made by the 'recursive' strategy.
+ text.txt | 1 +
+ 1 file changed, 1 insertion(+)
+ create mode 100644 text.txt

@@ -1,4 +1,3 @@
 
----
-featureB
-add stash
+featureA
+

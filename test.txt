@@ -1,0 +1,4 @@
+
+---
+featureB
+add stash
